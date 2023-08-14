@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: hieubui
+      POSTGRES_PASSWORD: 12345678
+    networks:
+      - bridge
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  pgAdmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: hieubui@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+      PGADMIN_LISTEN_PORT: 9090
+    networks:
+      - bridge
+    ports:
+      - 9090:9090
+    depends_on:
+      - db
+  pyapp:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - bridge
+    depends_on:
+      - db
+
+networks:
+  bridge:
+
+volumes:
+  postgres-data:
