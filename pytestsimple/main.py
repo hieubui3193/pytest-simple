@@ -161,6 +161,7 @@ if __name__ == '__main__':
         create_dump_table(cur)
         insert_datadump_to_db2(cur, profiles, 'user_profile')
         cur.close()
+        # pylint: disable=locally-disabled, broad-exception-caught
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:

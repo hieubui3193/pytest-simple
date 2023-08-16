@@ -2,11 +2,9 @@
 import uuid
 
 
+# pylint: disable=locally-disabled, too-few-public-methods, too-many-arguments
 class UserProfile:
-    """
-    This is model to store data from csv
-    """
-
+    """This is model to store data from csv."""
     def __init__(self, _id: uuid, user_name: str, email: str, domain_name: str,
                  birthday: str, job_area: str, country: str):
         self._id: uuid = _id
